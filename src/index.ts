@@ -140,3 +140,5 @@ app.get("/api/changelog", async (c) => {
 });
 
 export default app;
+
+console.log("Starting server on port 3000");
