@@ -57,7 +57,8 @@ app.post(
       console.log("processing merge request event");
       if (body.object_attributes.action !== "merge") {
         console.log(
-          `Ignoring merge request event with action: ${body.object_attributes.action}`
+          `Ignoring merge request event with action:`,
+          body.object_attributes.action
         );
         return c.text("ignored");
       }
@@ -72,7 +73,7 @@ app.post(
     } else if (body.object_kind == "release") {
       console.log("processing release event");
       if (body.action !== "create") {
-        console.log(`Ignoring release event with action: ${body.action}`);
+        console.log(`Ignoring release event with action:`, body.action);
         return c.text("ignored");
       }
 

@@ -5,7 +5,7 @@ export const GitlabMergeRequestEvent = z.object({
   object_attributes: z.object({
     id: z.number(),
     title: z.string(),
-    action: z.union([z.literal("merge"), z.string()]),
+    action: z.union([z.literal("merge"), z.string()]).optional(),
     url: z.string(),
   }),
 });
