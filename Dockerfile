@@ -24,4 +24,4 @@ RUN ["bunx", "prisma", "generate"]
 # run the app
 USER bun
 EXPOSE 3000/tcp
-ENTRYPOINT ["bunx" "prisma" "migrate", "deploy", "&&", "bun", "run", "src/index.ts" ]
+ENTRYPOINT ["bun", "run", "start:prod"]
