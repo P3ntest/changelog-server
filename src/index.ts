@@ -26,8 +26,10 @@ app.post(
         if (parsed.success) {
           return parsed.data;
         } else {
-          console.error(`Invalid payload: ${parsed.error.errors}`);
-          return c.status(400);
+          console.error(`Invalid payload`);
+          console.log("Error:", parsed.error.errors);
+          console.log("Payload:", value);
+          return c.text("Invalid payload");
         }
       }
       case "Release Hook": {
@@ -35,8 +37,10 @@ app.post(
         if (parsed.success) {
           return parsed.data;
         } else {
-          console.error(`Invalid payload: ${parsed.error.errors}`);
-          return c.status(400);
+          console.error(`Invalid payload`);
+          console.log("Error:", parsed.error.errors);
+          console.log("Payload:", value);
+          return c.text("Invalid payload");
         }
       }
       default:
@@ -49,7 +53,7 @@ app.post(
   async (c) => {
     const body = c.req.valid("json")!;
 
-    if (body.object_kind == "merge_request") {
+    if (body.object_kind === "merge_request") {
       console.log("processing merge request event");
       if (body.object_attributes.action !== "merge") {
         console.log(
