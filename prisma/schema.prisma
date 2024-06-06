@@ -22,7 +22,7 @@ model Change {
 
   gitlabUrl String?
 
-  Release   Release? @relation(fields: [releaseId], references: [id])
+  Release   Release? @relation(fields: [releaseId], references: [id], onDelete: SetNull)
   releaseId Int?
 }
 
