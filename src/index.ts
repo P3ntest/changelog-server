@@ -1,14 +1,22 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
 import { bearerAuth } from "hono/bearer-auth";
-
+import { trpcServer } from "@hono/trpc-server";
 import { prisma } from "./prisma";
 import { GitlabMergeRequestEvent, GitlabReleaseEvent } from "./gitlab";
+import { appRouter } from "./router";
 
 if (!process.env.WEBHOOK_SECRET) throw new Error("WEBHOOK_SECRET is not set");
 if (!process.env.USER_SECRET) throw new Error("USER_SECRET is not set");
 
 const app = new Hono();
+
+app.use(
+  "/trpc/*",
+  trpcServer({
+    router: appRouter,
+  })
+);
 
 const gitlabWebhook = `/webhooks/gitlab/${process.env.WEBHOOK_SECRET}`;
 console.log("Gitlab webhook URL:", gitlabWebhook);
